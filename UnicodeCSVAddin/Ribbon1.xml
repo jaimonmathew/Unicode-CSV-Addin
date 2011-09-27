@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright 2011 Jaimon Mathew www.jaimon.co.uk
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.     
+ 
+-->
+<customUI onLoad="Ribbon_Load" xmlns="http://schemas.microsoft.com/office/2006/01/customui">
+  <ribbon startFromScratch="false">
+    <tabs>
+      <tab idMso="TabAddIns" label="Unicode CSV">
+        <group id="group1" label="Unicode CSV (Beta)">
+          <button id="button1" imageMso="FileSave" onAction="SaveButtonAction" size="large"
+                  label="Save" screentip="Save this file as a Unicode CSV file. If the extension is not .csv, you'll be asked to select a csv file" />
+          <separator id="x1" insertAfterQ="button1"/>
+          <button id="button2" imageMso="FileSaveAs" onAction="SaveAsButtonAction" size="large"
+                  label="Save As" screentip="Save current file as a Unicode CSV file. You'll be asked to select a csv file"/>
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>
