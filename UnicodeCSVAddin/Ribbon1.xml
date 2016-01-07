@@ -18,7 +18,7 @@
 <customUI onLoad="Ribbon_Load" xmlns="http://schemas.microsoft.com/office/2006/01/customui">
   <ribbon startFromScratch="false">
     <tabs>
-      <tab idMso="TabAddIns" label="Unicode CSV">
+      <tab idMso="TabAddIns" label="Add-Ins">
         <group id="group1" label="Unicode CSV (Beta)">
           <button id="button1" imageMso="FileSave" onAction="SaveButtonAction" size="large"
                   label="Save" screentip="Save this file as a Unicode CSV file. If the extension is not .csv, you'll be asked to select a csv file" />

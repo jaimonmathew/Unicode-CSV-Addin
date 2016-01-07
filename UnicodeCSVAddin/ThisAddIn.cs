@@ -231,10 +231,10 @@ namespace UnicodeCSVAddin
                             File.Delete(tempFile);
                         }
 
-                        app.Workbooks.Open(filename, Type.Missing, Type.Missing, Excel.XlFileFormat.xlCSV, Type.Missing, Type.Missing, Type.Missing, Type.Missing, lSeparator);
+                        app.Workbooks.Open(filename, Type.Missing, Type.Missing, 6, Type.Missing, Type.Missing, Type.Missing, Type.Missing, lSeparator);
                         Excel.Worksheet ws = app.ActiveWorkbook.ActiveSheet;
                         ws.Cells[row, col].Select();
-                        app.StatusBar = "File has been saved as a Unicode CSV";
+                        app.StatusBar = Path.GetFileName(filename) + " has been saved as a Unicode CSV";
                         if (!unicodeFiles.Contains(filename))
                         {
                             unicodeFiles.Add(filename);
