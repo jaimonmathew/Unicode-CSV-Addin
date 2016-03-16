@@ -203,7 +203,7 @@ namespace UnicodeCSVAddin
 
                             if (new FileInfo(tempFile).Length <= (1024 * 1024)) //If its less than 1MB, load the whole data to memory for character replacement
                             {
-                                File.WriteAllText(filename, File.ReadAllText(tempFile, UnicodeEncoding.UTF8).Replace("\t", lSeparator), UnicodeEncoding.UTF8);
+                                File.WriteAllText(filename, File.ReadAllText(tempFile, Encoding.Unicode).Replace("\t", lSeparator), Encoding.Unicode);
                             }
                             else //otherwise read chunks for data (in 10KB chunks) into memory
                             {
