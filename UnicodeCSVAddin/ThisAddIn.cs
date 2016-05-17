@@ -208,9 +208,9 @@ namespace UnicodeCSVAddin
                             else //otherwise read chunks for data (in 10KB chunks) into memory
                             {
                                 using (StreamReader sr = new StreamReader(tempFile, true))
-                                using (StreamWriter sw = new StreamWriter(filename, false, sr.CurrentEncoding))
+                                using (StreamWriter sw = new StreamWriter(filename, false, Encoding.Unicode))
                                 {
-                                    char[] buffer = new char[10 * 1024]; //10KB Chunks
+                                    char[] buffer = new char[100 * 1024]; //100KB Chunks
                                     while (!sr.EndOfStream)
                                     {
                                         int cnt = sr.ReadBlock(buffer, 0, buffer.Length);
