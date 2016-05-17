@@ -23,6 +23,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Collections.Generic;
 using System.IO;
+using System.Globalization;
 
 namespace UnicodeCSVAddin
 {
@@ -37,6 +38,8 @@ namespace UnicodeCSVAddin
         private const string UTF_16LE_BOM = "FFFE";
         private const string UTF_8_BOM = "EFBBBF";
 
+        private string lSeparator = ",";
+
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             app = this.Application;
@@ -44,6 +47,14 @@ namespace UnicodeCSVAddin
             app.WorkbookOpen += new Excel.AppEvents_WorkbookOpenEventHandler(app_WorkbookOpen);
             app.WorkbookBeforeClose += new Excel.AppEvents_WorkbookBeforeCloseEventHandler(app_WorkbookBeforeClose);
             app.WorkbookBeforeSave += new Excel.AppEvents_WorkbookBeforeSaveEventHandler(app_WorkbookBeforeSave);
+            try
+            {
+                lSeparator = CultureInfo.CurrentCulture.TextInfo.ListSeparator;
+            }
+            catch
+            {
+                lSeparator = ",";
+            }
         }
 
         void ThisAddIn_Shutdown(object sender, EventArgs e)
@@ -192,14 +203,14 @@ namespace UnicodeCSVAddin
 
                             if (new FileInfo(tempFile).Length <= (1024 * 1024)) //If its less than 1MB, load the whole data to memory for character replacement
                             {
-                                File.WriteAllText(filename, File.ReadAllText(tempFile, UnicodeEncoding.UTF8).Replace("\t", ","), UnicodeEncoding.UTF8);
+                                File.WriteAllText(filename, File.ReadAllText(tempFile, Encoding.Unicode).Replace("\t", lSeparator), Encoding.Unicode);
                             }
                             else //otherwise read chunks for data (in 10KB chunks) into memory
                             {
                                 using (StreamReader sr = new StreamReader(tempFile, true))
-                                using (StreamWriter sw = new StreamWriter(filename, false, sr.CurrentEncoding))
+                                using (StreamWriter sw = new StreamWriter(filename, false, Encoding.Unicode))
                                 {
-                                    char[] buffer = new char[10 * 1024]; //10KB Chunks
+                                    char[] buffer = new char[100 * 1024]; //100KB Chunks
                                     while (!sr.EndOfStream)
                                     {
                                         int cnt = sr.ReadBlock(buffer, 0, buffer.Length);
@@ -207,7 +218,7 @@ namespace UnicodeCSVAddin
                                         {
                                             if (buffer[i] == '\t')
                                             {
-                                                buffer[i] = ',';
+                                                buffer[i] = lSeparator[0];
                                             }
                                         }
                                         sw.Write(buffer, 0, cnt);
@@ -220,10 +231,10 @@ namespace UnicodeCSVAddin
                             File.Delete(tempFile);
                         }
 
-                        app.Workbooks.Open(filename, Type.Missing, Type.Missing, Excel.XlFileFormat.xlCSV, Type.Missing, Type.Missing, Type.Missing, Type.Missing, ",");
+                        app.Workbooks.Open(filename, Type.Missing, Type.Missing, 6, Type.Missing, Type.Missing, Type.Missing, Type.Missing, lSeparator);
                         Excel.Worksheet ws = app.ActiveWorkbook.ActiveSheet;
                         ws.Cells[row, col].Select();
-                        app.StatusBar = "File has been saved as a Unicode CSV";
+                        app.StatusBar = Path.GetFileName(filename) + " has been saved as a Unicode CSV";
                         if (!unicodeFiles.Contains(filename))
                         {
                             unicodeFiles.Add(filename);

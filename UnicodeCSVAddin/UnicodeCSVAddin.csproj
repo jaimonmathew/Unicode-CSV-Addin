@@ -34,14 +34,14 @@
     <PublishUrl>publish\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <ApplicationVersion>1.2.2.0</ApplicationVersion>
     <AutoIncrementApplicationRevision>false</AutoIncrementApplicationRevision>
     <UpdateEnabled>false</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
     <UpdateIntervalUnits>days</UpdateIntervalUnits>
     <ProductName>UnicodeCSVAddin</ProductName>
     <PublisherName>Jaimon Mathew</PublisherName>
-    <SupportUrl />
+    <SupportUrl>https://jaimonmathew.wordpress.com/2011/08/23/excel_addin_to_work_with_unicode_csv/</SupportUrl>
     <FriendlyName>UnicodeCSVAddin</FriendlyName>
     <OfficeApplicationDescription />
     <LoadBehavior>3</LoadBehavior>
@@ -147,7 +147,7 @@
     </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>63F197019E55BC058623F80FBE2E41BE119CF7C2</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>F371C0BA2420FC3DB3E5C7F1EF56D8B08784B1C6</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
